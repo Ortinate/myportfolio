@@ -263,6 +263,15 @@ a {
   transform: translateY(-3px);
 }
 
+/* Studio Logo Micro-Interactions */
+.studio-logo:hover .studio-logo-mark {
+  transform: translateY(-1px) rotate(-2deg);
+}
+
+.studio-logo:hover .studio-logo-petal {
+  transform: rotate(14deg) scale(1.08);
+}
+
 /* Header & Navigation Transitions */
 .site-header {
   position: fixed;

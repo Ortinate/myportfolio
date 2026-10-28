@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Send, MapPin, Clock, Calendar, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, TwitterIcon } from './Icons';
+import Logo from './Logo';
 import confetti from 'canvas-confetti';
 
 const STUDIO_EMAIL = 'loveydovey7783@gmail.com';
@@ -368,8 +369,8 @@ export default function ContactSection() {
 
         {/* Studio Colophon & Footer */}
         <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px solid var(--border-hairline)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.25rem', fontSize: '0.82rem', color: 'var(--ink-tertiary)' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
-            <span style={{ fontWeight: 800, color: 'var(--ink-primary)' }}>Lovey.</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <Logo size={24} />
             <span>Crafted with Japanese Aesthetic Harmony · React &amp; Modern CSS.</span>
           </div>
 
