@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Search, X, FolderGit2, Terminal, User, Mail, FileText, Volume2, Moon, Sun, ArrowRight } from 'lucide-react';
-import { playClickSound, playPopSound } from '../utils/audio';
+import { Search, X, FolderGit2, Terminal, User, Mail, Moon, Sun, ArrowRight } from 'lucide-react';
 
-export default function CommandMenu({ isOpen, onClose, onToggleSound, soundEnabled, onToggleTheme, theme }) {
+export default function CommandMenu({ isOpen, onClose, onToggleTheme, theme }) {
   const [query, setQuery] = useState('');
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        playPopSound();
         if (isOpen) onClose();
-        else onClose(false); // toggle handled by parent
       } else if (e.key === 'Escape' && isOpen) {
         onClose();
       }
@@ -66,17 +63,8 @@ export default function CommandMenu({ isOpen, onClose, onToggleSound, soundEnabl
       action: () => scrollToSection('contact'),
     },
     {
-      id: 'toggle-sound',
-      label: soundEnabled ? 'Mute Tactile Audio Feedback' : 'Enable Tactile Audio Feedback',
-      category: 'Preference',
-      icon: <Volume2 size={16} />,
-      action: () => {
-        onToggleSound();
-      },
-    },
-    {
       id: 'toggle-theme',
-      label: theme === 'dark' ? 'Switch to Clean White Studio' : 'Switch to Dark Studio Mode',
+      label: theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode',
       category: 'Theme',
       icon: theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />,
       action: () => {
@@ -116,7 +104,7 @@ export default function CommandMenu({ isOpen, onClose, onToggleSound, soundEnabl
             }}
           />
           <button
-            onClick={() => { playClickSound(); onClose(); }}
+            onClick={onClose}
             style={{ color: 'var(--ink-tertiary)', padding: '0.2rem' }}
           >
             <X size={18} />
@@ -133,10 +121,7 @@ export default function CommandMenu({ isOpen, onClose, onToggleSound, soundEnabl
             filtered.map((item) => (
               <button
                 key={item.id}
-                onClick={() => {
-                  playClickSound();
-                  item.action();
-                }}
+                onClick={() => item.action()}
                 style={{
                   width: '100%',
                   display: 'flex',

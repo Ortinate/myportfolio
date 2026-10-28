@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX, Moon, Sun, Command, Globe, Menu, X } from 'lucide-react';
-import { playClickSound } from '../utils/audio';
+import { Moon, Sun, Globe, Menu, X } from 'lucide-react';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home', kanji: '家', href: '#home' },
@@ -9,7 +8,7 @@ const NAV_ITEMS = [
   { id: 'philosophy', label: 'Philosophy', kanji: '道', href: '#philosophy' },
 ];
 
-export default function Navbar({ soundEnabled, onToggleSound, theme, onToggleTheme, onOpenCommandMenu }) {
+export default function Navbar({ theme, onToggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [lang, setLang] = useState('EN');
@@ -43,13 +42,11 @@ export default function Navbar({ soundEnabled, onToggleSound, theme, onToggleThe
   }, []);
 
   const toggleLang = () => {
-    playClickSound();
     setLang((prev) => (prev === 'EN' ? 'JA' : 'EN'));
   };
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
-    playClickSound();
     setActiveSection(id);
     setMobileMenuOpen(false);
 
@@ -155,26 +152,6 @@ export default function Navbar({ soundEnabled, onToggleSound, theme, onToggleThe
             <span>{lang === 'EN' ? 'EN' : '日本語'}</span>
           </button>
 
-          {/* Audio tactile click toggle (Desktop) */}
-          <button
-            onClick={onToggleSound}
-            className="desktop-only-tool"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '34px',
-              height: '34px',
-              borderRadius: '6px',
-              border: '1px solid var(--border-hairline)',
-              background: soundEnabled ? 'var(--brand-sakura)' : 'var(--bg-card)',
-              color: soundEnabled ? 'var(--brand-crimson)' : 'var(--ink-tertiary)',
-            }}
-            title={soundEnabled ? 'Mute sound clicks' : 'Enable tactile clicks'}
-          >
-            {soundEnabled ? <Volume2 size={15} /> : <VolumeX size={15} />}
-          </button>
-
           {/* Theme switcher */}
           <button
             onClick={onToggleTheme}
@@ -189,40 +166,15 @@ export default function Navbar({ soundEnabled, onToggleSound, theme, onToggleThe
               background: 'var(--bg-card)',
               color: 'var(--ink-secondary)',
             }}
-            title={theme === 'dark' ? 'Switch to clean white' : 'Switch to dark theme'}
+            title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           >
             {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
-          </button>
-
-          {/* Quick Cmd+K palette trigger (Desktop) */}
-          <button
-            onClick={() => { playClickSound(); onOpenCommandMenu(); }}
-            className="desktop-only-tool"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              padding: '0.35rem 0.55rem',
-              borderRadius: '6px',
-              border: '1px solid var(--border-hairline)',
-              background: 'var(--bg-card)',
-              color: 'var(--ink-secondary)',
-              fontSize: '0.75rem',
-              fontWeight: 600,
-            }}
-            title="Press Cmd+K"
-          >
-            <Command size={13} />
-            <span style={{ fontSize: '0.7rem', color: 'var(--ink-tertiary)' }}>⌘K</span>
           </button>
 
           {/* Mobile Hamburger Menu Button */}
           <button
             className="mobile-menu-btn"
-            onClick={() => {
-              playClickSound();
-              setMobileMenuOpen((prev) => !prev);
-            }}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -280,7 +232,7 @@ export default function Navbar({ soundEnabled, onToggleSound, theme, onToggleThe
             </button>
 
             <button
-              onClick={onToggleSound}
+              onClick={onToggleTheme}
               style={{
                 flex: 1,
                 display: 'inline-flex',
@@ -292,12 +244,12 @@ export default function Navbar({ soundEnabled, onToggleSound, theme, onToggleThe
                 padding: '0.5rem',
                 borderRadius: '6px',
                 border: '1px solid var(--border-hairline)',
-                background: soundEnabled ? 'var(--brand-sakura)' : 'var(--bg-main)',
-                color: soundEnabled ? 'var(--brand-crimson)' : 'var(--ink-secondary)',
+                background: 'var(--bg-main)',
+                color: 'var(--ink-secondary)',
               }}
             >
-              {soundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
-              <span>{soundEnabled ? 'Sound: ON' : 'Sound: OFF'}</span>
+              {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+              <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
             </button>
           </div>
         </div>

@@ -28,7 +28,7 @@ export default function Hero() {
           left: 0,
           right: 0,
           height: '110px',
-          background: 'linear-gradient(to bottom, var(--bg-main) 25%, rgba(250, 250, 250, 0) 100%)',
+          background: 'linear-gradient(to bottom, var(--bg-main) 25%, transparent 100%)',
           pointerEvents: 'none',
           zIndex: 2,
         }}
@@ -143,7 +143,8 @@ export default function Hero() {
               gap: '1.25rem',
               fontSize: 'clamp(1.35rem, 2.5vw, 1.75rem)',
               lineHeight: 1.4,
-              color: 'rgba(10, 13, 20, 0.18)',
+              color: 'var(--ink-primary)',
+              opacity: 0.18,
               fontWeight: 700,
               letterSpacing: '0.2em',
             }}

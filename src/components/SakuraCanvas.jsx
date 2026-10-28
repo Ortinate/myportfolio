@@ -138,12 +138,12 @@ export default function SakuraCanvas() {
 
     let lastSpawnTime = 0;
 
-    const handleMouseMove = (e) => {
+    const updatePointerPosition = (clientX, clientY) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
 
-      // Check if cursor is inside the Hero canvas bounds
+      // Check if pointer/finger is inside the Hero canvas bounds
       if (x >= 0 && x <= width && y >= 0 && y <= height) {
         if (mouse.active && mouse.prevX !== -9999) {
           mouse.vx = Math.max(-18, Math.min(18, x - mouse.prevX));
@@ -155,10 +155,10 @@ export default function SakuraCanvas() {
         mouse.y = y;
         mouse.active = true;
 
-        // Spawn a delicate breeze petal when sweeping the cursor briskly
+        // Spawn a delicate breeze petal when sweeping pointer or finger briskly
         const speed = Math.hypot(mouse.vx, mouse.vy);
         const now = performance.now();
-        if (speed > 9 && petals.length < maxPetals && now - lastSpawnTime > 90) {
+        if (speed > 7 && petals.length < maxPetals && now - lastSpawnTime > 80) {
           lastSpawnTime = now;
           petals.push(
             new Petal(
@@ -173,18 +173,39 @@ export default function SakuraCanvas() {
       }
     };
 
-    const handleMouseDown = (e) => {
+    const spawnPetalBurst = (clientX, clientY, count = 4) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
       if (x >= 0 && x <= width && y >= 0 && y <= height) {
-        // Burst 4 petals on click inside hero
-        for (let i = 0; i < 4; i++) {
+        mouse.x = x;
+        mouse.y = y;
+        mouse.prevX = x;
+        mouse.prevY = y;
+        mouse.active = true;
+
+        // Push nearby existing petals outward on tap/click
+        for (let i = 0; i < petals.length; i++) {
+          const p = petals[i];
+          const dx = p.x - x;
+          const dy = p.y - y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < mouse.radius && dist > 1) {
+            const force = (1 - dist / mouse.radius) * 2.4;
+            p.vx += (dx / dist) * force;
+            p.vy += (dy / dist) * force - 0.4;
+            p.extraSpin += ((Math.random() - 0.5) * 0.08) * force;
+            p.extraFlip += 0.06 * force;
+          }
+        }
+
+        // Spawn new burst petals at tap/click point
+        for (let i = 0; i < count; i++) {
           if (petals.length < maxPetals) {
             petals.push(
               new Petal(
-                x + (Math.random() - 0.5) * 20,
-                y + (Math.random() - 0.5) * 20,
+                x + (Math.random() - 0.5) * 22,
+                y + (Math.random() - 0.5) * 22,
                 true
               )
             );
@@ -193,14 +214,38 @@ export default function SakuraCanvas() {
       }
     };
 
-    const handleMouseLeave = () => {
+    const handleMouseMove = (e) => {
+      updatePointerPosition(e.clientX, e.clientY);
+    };
+
+    const handleMouseDown = (e) => {
+      spawnPetalBurst(e.clientX, e.clientY, 4);
+    };
+
+    const handleTouchStart = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        spawnPetalBurst(touch.clientX, touch.clientY, 5);
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        updatePointerPosition(touch.clientX, touch.clientY);
+      }
+    };
+
+    const handlePointerEnd = () => {
       mouse.active = false;
+      mouse.prevX = -9999;
+      mouse.prevY = -9999;
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Decay mouse velocity smoothly when cursor stops moving
+      // Decay pointer velocity smoothly when movement stops
       mouse.vx *= 0.85;
       mouse.vy *= 0.85;
 
@@ -226,14 +271,22 @@ export default function SakuraCanvas() {
     window.addEventListener('resize', handleResize);
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mousedown', handleMouseDown, { passive: true });
-    window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('mouseleave', handlePointerEnd);
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handlePointerEnd, { passive: true });
+    window.addEventListener('touchcancel', handlePointerEnd, { passive: true });
 
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('mouseleave', handlePointerEnd);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handlePointerEnd);
+      window.removeEventListener('touchcancel', handlePointerEnd);
     };
   }, []);
 
