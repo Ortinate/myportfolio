@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Check, Send, MapPin, Clock, Calendar } from 'lucide-react';
+import { Check, Send, MapPin, Clock, Calendar, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, TwitterIcon } from './Icons';
 import confetti from 'canvas-confetti';
-import { playClickSound, playPopSound } from '../utils/audio';
+
+const STUDIO_EMAIL = 'loveydovey7783@gmail.com';
 
 export default function ContactSection() {
   const [formState, setFormState] = useState({
@@ -21,12 +22,35 @@ export default function ContactSection() {
     'Performance & SEO',
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formState.email || !formState.message) return;
 
-    playPopSound();
     setIsSubmitting(true);
+
+    try {
+      await fetch(`https://formsubmit.co/ajax/${STUDIO_EMAIL}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          inquiryFocus: formState.serviceType,
+          message: formState.message,
+          _subject: `[Lovey Studio] ${formState.serviceType} Inquiry from ${formState.name}`,
+        }),
+      });
+    } catch {
+      // Fallback: open pre-filled mailto if network request is blocked
+      const subject = encodeURIComponent(`[Lovey Studio] ${formState.serviceType} Inquiry from ${formState.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formState.name}\nEmail: ${formState.email}\nFocus: ${formState.serviceType}\n\n${formState.message}`
+      );
+      window.location.href = `mailto:${STUDIO_EMAIL}?subject=${subject}&body=${body}`;
+    }
 
     // Celebratory cherry blossom and gold confetti
     confetti({
@@ -36,17 +60,15 @@ export default function ContactSection() {
       colors: ['#E11D48', '#F43F5E', '#FBBF24', '#0A0D14', '#F472B6'],
     });
 
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormState({
-        name: '',
-        email: '',
-        serviceType: 'Bespoke Web Experience',
-        message: '',
-      });
-      setTimeout(() => setSubmitted(false), 6000);
-    }, 900);
+    setIsSubmitting(false);
+    setSubmitted(true);
+    setFormState({
+      name: '',
+      email: '',
+      serviceType: 'Bespoke Web Experience',
+      message: '',
+    });
+    setTimeout(() => setSubmitted(false), 6000);
   };
 
   return (
@@ -114,6 +136,15 @@ export default function ContactSection() {
               {/* Studio Metadata List */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.85rem', color: 'var(--ink-secondary)' }}>
+                  <Mail size={15} color="var(--brand-crimson)" style={{ flexShrink: 0 }} />
+                  <a
+                    href={`mailto:${STUDIO_EMAIL}`}
+                    style={{ color: 'var(--ink-primary)', fontWeight: 600 }}
+                  >
+                    {STUDIO_EMAIL}
+                  </a>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', fontSize: '0.85rem', color: 'var(--ink-secondary)' }}>
                   <MapPin size={15} color="var(--brand-crimson)" style={{ flexShrink: 0 }} />
                   <span>Tarkwa, Western Region, Ghana (Global Remote)</span>
                 </div>
@@ -138,7 +169,6 @@ export default function ContactSection() {
                     target="_blank"
                     rel="noreferrer"
                     className="btn-secondary"
-                    onClick={playClickSound}
                     style={{ padding: '0.5rem 0.85rem', fontSize: '0.8rem', borderRadius: '6px' }}
                   >
                     <GithubIcon size={14} /> GitHub
@@ -148,7 +178,6 @@ export default function ContactSection() {
                     target="_blank"
                     rel="noreferrer"
                     className="btn-secondary"
-                    onClick={playClickSound}
                     style={{ padding: '0.5rem 0.85rem', fontSize: '0.8rem', borderRadius: '6px' }}
                   >
                     <LinkedinIcon size={14} /> LinkedIn
@@ -158,7 +187,6 @@ export default function ContactSection() {
                     target="_blank"
                     rel="noreferrer"
                     className="btn-secondary"
-                    onClick={playClickSound}
                     style={{ padding: '0.5rem 0.85rem', fontSize: '0.8rem', borderRadius: '6px' }}
                   >
                     <TwitterIcon size={14} /> Twitter / X
@@ -257,10 +285,7 @@ export default function ContactSection() {
                         <button
                           key={opt}
                           type="button"
-                          onClick={() => {
-                            playClickSound();
-                            setFormState({ ...formState, serviceType: opt });
-                          }}
+                          onClick={() => setFormState({ ...formState, serviceType: opt })}
                           style={{
                             padding: '0.4rem 0.8rem',
                             borderRadius: '6px',
