@@ -31,7 +31,7 @@ export default function Logo({ size = 32, showWordmark = true }) {
           width="58"
           height="58"
           rx="14"
-          fill="var(--ink-primary)"
+          fill="var(--logo-stamp-bg)"
         />
         {/* Inner Vermilion Hanko Seal Hairline */}
         <rect
@@ -48,7 +48,7 @@ export default function Logo({ size = 32, showWordmark = true }) {
         {/* Architectural Brush 'L' */}
         <path
           d="M20.5 16.5C20.5 15.3954 21.3954 14.5 22.5 14.5H26.5C27.6046 14.5 28.5 15.3954 28.5 16.5V40H43.5C44.6046 40 45.5 40.8954 45.5 42V45.5C45.5 46.6046 44.6046 47.5 43.5 47.5H22.5C21.3954 47.5 20.5 46.6046 20.5 45.5V16.5Z"
-          fill="var(--bg-card)"
+          fill="var(--logo-stamp-l)"
         />
 
         {/* Notched Sakura Blossom Petal inside the Crest */}

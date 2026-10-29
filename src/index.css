@@ -51,9 +51,25 @@
   --max-width: 1200px;
   --container-padding: clamp(1rem, 4vw, 2.5rem);
   --header-height-scrolled: 60px;
+
+  /* Adaptive Components (Light Studio) */
+  --bento-stone-bg: #EAE6DF;
+  --bento-stone-ink: #1A1815;
+  --bento-stone-sub: #4A463F;
+  --bento-stone-muted: #6B665E;
+  --bento-stone-border: rgba(0, 0, 0, 0.06);
+  --bento-portrait-bg: #F9F8F6;
+  --logo-stamp-bg: #0A0D14;
+  --logo-stamp-l: #FAFAFA;
+  --success-banner-bg: #ECFDF5;
+  --success-banner-border: #A7F3D0;
+  --success-banner-ink: #065F46;
+  --success-banner-sub: #047857;
+  --success-icon-bg: #D1FAE5;
+  --success-icon-ink: #059669;
 }
 
-/* Optional Dark Studio toggle support while keeping Clean White as default */
+/* Dark Studio Mode - Automatically Adapts to OS/User */
 [data-theme='dark'] {
   --bg-main: #0B0D12;
   --bg-card: #131720;
@@ -80,6 +96,22 @@
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.7);
   --shadow-float: 0 20px 48px rgba(0, 0, 0, 0.85);
+
+  /* Adaptive Components (Dark Studio) */
+  --bento-stone-bg: #161A25;
+  --bento-stone-ink: #F8FAFC;
+  --bento-stone-sub: #94A3B8;
+  --bento-stone-muted: #64748B;
+  --bento-stone-border: rgba(255, 255, 255, 0.08);
+  --bento-portrait-bg: #131720;
+  --logo-stamp-bg: #161A25;
+  --logo-stamp-l: #F8FAFC;
+  --success-banner-bg: #064E3B;
+  --success-banner-border: #059669;
+  --success-banner-ink: #ECFDF5;
+  --success-banner-sub: #A7F3D0;
+  --success-icon-bg: #047857;
+  --success-icon-ink: #A7F3D0;
 }
 
 /* CSS Reset & Defaults */
@@ -446,11 +478,13 @@ a {
   z-index: 1;
   mask-image: radial-gradient(ellipse 78% 78% at 62% 48%, rgba(0,0,0,1) 48%, rgba(0,0,0,0) 90%);
   -webkit-mask-image: radial-gradient(ellipse 78% 78% at 62% 48%, rgba(0,0,0,1) 48%, rgba(0,0,0,0) 90%);
+  transition: opacity 300ms ease, filter 300ms ease;
 }
 
 [data-theme='dark'] .hero-artwork {
   mix-blend-mode: screen;
-  opacity: 0.25;
+  filter: invert(0.92) hue-rotate(180deg) contrast(1.15);
+  opacity: 0.38;
 }
 
 .hero-cta-group {

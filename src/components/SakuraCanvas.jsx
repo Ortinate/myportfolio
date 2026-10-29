@@ -107,13 +107,21 @@ export default function SakuraCanvas() {
         return true;
       }
 
-      draw() {
+      draw(isDark = false) {
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
         ctx.scale(1, Math.cos(this.flip));
 
-        ctx.fillStyle = `rgba(244, 114, 182, ${this.opacity})`;
+        if (isDark) {
+          ctx.shadowColor = 'rgba(244, 63, 94, 0.4)';
+          ctx.shadowBlur = 8;
+        }
+
+        ctx.fillStyle = isDark
+          ? `rgba(251, 146, 198, ${Math.min(0.95, this.opacity * 1.3)})`
+          : `rgba(244, 114, 182, ${this.opacity})`;
+
         ctx.beginPath();
         // Delicate curved sakura petal shape with notched tip
         ctx.moveTo(0, 0);
@@ -123,7 +131,9 @@ export default function SakuraCanvas() {
         ctx.fill();
 
         // Inner petal highlight gradient
-        ctx.fillStyle = `rgba(251, 207, 232, ${this.opacity * 0.65})`;
+        ctx.fillStyle = isDark
+          ? `rgba(254, 215, 237, ${this.opacity * 0.85})`
+          : `rgba(251, 207, 232, ${this.opacity * 0.65})`;
         ctx.beginPath();
         ctx.arc(this.size * 0.4, this.size * 0.2, this.size * 0.25, 0, Math.PI * 2);
         ctx.fill();
@@ -245,6 +255,9 @@ export default function SakuraCanvas() {
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
+      // Check current theme dynamically for adaptive night/day petals
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
       // Decay pointer velocity smoothly when movement stops
       mouse.vx *= 0.85;
       mouse.vy *= 0.85;
@@ -254,7 +267,7 @@ export default function SakuraCanvas() {
         if (!alive) {
           petals.splice(i, 1);
         } else {
-          petals[i].draw();
+          petals[i].draw(isDark);
         }
       }
       animId = requestAnimationFrame(animate);

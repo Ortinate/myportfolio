@@ -42,13 +42,14 @@ export default function BentoSection() {
             <div
               className="bento-card-headline"
               style={{
-                background: '#EAE6DF',
+                background: 'var(--bento-stone-bg)',
                 borderRadius: '10px',
                 padding: 'clamp(1.5rem, 2.5vw, 2rem) clamp(1.25rem, 2vw, 1.75rem)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                border: '1px solid rgba(0, 0, 0, 0.06)',
+                border: '1px solid var(--bento-stone-border)',
+                transition: 'background-color 200ms ease, border-color 200ms ease',
               }}
             >
               <h2
@@ -57,8 +58,9 @@ export default function BentoSection() {
                   fontWeight: 900,
                   lineHeight: 1.08,
                   letterSpacing: '-0.035em',
-                  color: '#1A1815',
+                  color: 'var(--bento-stone-ink)',
                   textTransform: 'uppercase',
+                  transition: 'color 200ms ease',
                 }}
               >
                 Why build your<br />
@@ -89,11 +91,12 @@ export default function BentoSection() {
               style={{
                 borderRadius: '10px',
                 overflow: 'hidden',
-                background: '#F9F8F6',
+                background: 'var(--bento-portrait-bg)',
                 border: '1px solid var(--border-hairline)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                transition: 'background-color 200ms ease',
               }}
             >
               <img
@@ -151,19 +154,21 @@ export default function BentoSection() {
             <div
               className="bento-card-manage"
               style={{
-                background: '#EAE6DF',
-                color: '#1A1815',
+                background: 'var(--bento-stone-bg)',
+                color: 'var(--bento-stone-ink)',
                 borderRadius: '10px',
                 padding: 'clamp(1.35rem, 2.2vw, 1.75rem)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
+                border: '1px solid var(--bento-stone-border)',
+                transition: 'background-color 200ms ease, color 200ms ease, border-color 200ms ease',
               }}
             >
-              <div style={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', color: '#6B665E', marginBottom: '0.4rem' }}>
+              <div style={{ fontSize: '0.72rem', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--bento-stone-muted)', marginBottom: '0.4rem', transition: 'color 200ms ease' }}>
                 04 SELF-MANAGE YOUR SITE
               </div>
-              <p style={{ fontSize: '0.82rem', color: '#4A463F', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.82rem', color: 'var(--bento-stone-sub)', lineHeight: 1.5, transition: 'color 200ms ease' }}>
                 We use a platform so you or your team can change and publish updates without depending on anyone.
               </p>
             </div>

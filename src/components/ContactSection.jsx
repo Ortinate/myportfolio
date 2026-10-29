@@ -83,7 +83,6 @@ export default function ContactSection() {
           right: '4%',
           fontSize: 'clamp(4rem, 10vw, 9rem)',
           lineHeight: 1.1,
-          color: 'rgba(225, 29, 72, 0.03)',
           fontFamily: 'serif',
           fontWeight: 900,
           pointerEvents: 'none',
@@ -208,14 +207,14 @@ export default function ContactSection() {
               </div>
 
               {submitted ? (
-                <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', padding: '2.5rem 1.5rem', borderRadius: '10px', textAlign: 'center' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#D1FAE5', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto' }}>
+                <div style={{ background: 'var(--success-banner-bg)', border: '1px solid var(--success-banner-border)', padding: '2.5rem 1.5rem', borderRadius: '10px', textAlign: 'center', transition: 'background-color 200ms ease, border-color 200ms ease' }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--success-icon-bg)', color: 'var(--success-icon-ink)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto' }}>
                     <Check size={24} />
                   </div>
-                  <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#065F46', marginBottom: '0.5rem' }}>
+                  <h4 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--success-banner-ink)', marginBottom: '0.5rem' }}>
                     Dispatch Delivered! · 受理完了
                   </h4>
-                  <p style={{ fontSize: '0.88rem', color: '#047857', lineHeight: 1.6 }}>
+                  <p style={{ fontSize: '0.88rem', color: 'var(--success-banner-sub)', lineHeight: 1.6 }}>
                     Thank you. Your message has reached Lovey Studio. A thoughtful reply will be sent to your inbox shortly.
                   </p>
                 </div>
