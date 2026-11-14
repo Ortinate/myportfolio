@@ -7,11 +7,12 @@ export default function Logo({ size = 32, showWordmark = true }) {
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '0.6rem',
+        gap: '0.65rem',
         userSelect: 'none',
+        textDecoration: 'none',
       }}
     >
-      {/* Custom Kamon / Hanko Monogram SVG Mark */}
+      {/* Minimalist Geometric Japanese Kamon Crest with Interlocking Monogram */}
       <svg
         width={size}
         height={size}
@@ -21,44 +22,67 @@ export default function Logo({ size = 32, showWordmark = true }) {
         className="studio-logo-mark"
         style={{
           flexShrink: 0,
-          transition: 'transform 280ms var(--ease-snappy)',
+          transition: 'transform 320ms var(--ease-snappy)',
         }}
       >
-        {/* Outer Stamp Block */}
-        <rect
-          x="3"
-          y="3"
-          width="58"
-          height="58"
-          rx="14"
+        <defs>
+          <linearGradient id="kamonBorderGrad" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="var(--brand-crimson)" />
+            <stop offset="100%" stopColor="var(--brand-coral)" />
+          </linearGradient>
+        </defs>
+
+        {/* Circular Outer Kamon Disc (theme-adaptive) */}
+        <circle
+          cx="32"
+          cy="32"
+          r="28"
           fill="var(--logo-stamp-bg)"
         />
-        {/* Inner Vermilion Hanko Seal Hairline */}
-        <rect
-          x="7"
-          y="7"
-          width="50"
-          height="50"
-          rx="10.5"
-          stroke="var(--brand-crimson)"
-          strokeWidth="2"
-          strokeOpacity="0.9"
+
+        {/* Minimalist Orbit / Hairline Crest Ring */}
+        <circle
+          cx="32"
+          cy="32"
+          r="25"
+          stroke="url(#kamonBorderGrad)"
+          strokeWidth="1.5"
+          strokeDasharray="4 2"
+          strokeOpacity="0.85"
+          className="studio-kamon-ring"
         />
 
-        {/* Architectural Brush 'L' */}
+        {/* Geometric Origami Sakura Blossom Crest (5 stylized facets) */}
+        <g
+          className="studio-origami-blossom"
+          transform="translate(32, 28)"
+          style={{
+            transformOrigin: '32px 28px',
+            transition: 'transform 450ms var(--ease-bounce)',
+          }}
+        >
+          {/* Top Petal */}
+          <path d="M0 -15 L4 -6 L0 0 L-4 -6 Z" fill="var(--brand-crimson)" opacity="0.95" />
+          {/* Top-Right Petal */}
+          <path d="M14 -5 L7 -1 L0 0 L6 -8 Z" fill="var(--brand-coral)" opacity="0.9" />
+          {/* Bottom-Right Petal */}
+          <path d="M9 12 L3 5 L0 0 L10 2 Z" fill="var(--brand-crimson)" opacity="0.85" />
+          {/* Bottom-Left Petal */}
+          <path d="M-9 12 L-10 2 L0 0 L-3 5 Z" fill="var(--brand-coral)" opacity="0.9" />
+          {/* Top-Left Petal */}
+          <path d="M-14 -5 L-6 -8 L0 0 L-7 -1 Z" fill="var(--brand-crimson)" opacity="0.95" />
+          {/* Center Dew Core */}
+          <circle cx="0" cy="0" r="2.2" fill="var(--bg-card)" />
+        </g>
+
+        {/* Precision Modern Interlocking 'L' Studio Monogram */}
         <path
-          d="M20.5 16.5C20.5 15.3954 21.3954 14.5 22.5 14.5H26.5C27.6046 14.5 28.5 15.3954 28.5 16.5V40H43.5C44.6046 40 45.5 40.8954 45.5 42V45.5C45.5 46.6046 44.6046 47.5 43.5 47.5H22.5C21.3954 47.5 20.5 46.6046 20.5 45.5V16.5Z"
+          d="M20 22 C20 20.895 20.895 20 22 20 H25.5 C26.605 20 27.5 20.895 27.5 22 V42 H42 C43.105 42 44 42.895 44 44 V46 C44 47.105 43.105 48 42 48 H22 C20.895 48 20 47.105 20 46 Z"
           fill="var(--logo-stamp-l)"
         />
 
-        {/* Notched Sakura Blossom Petal inside the Crest */}
-        <g className="studio-logo-petal" style={{ transformOrigin: '41px 24px', transition: 'transform 340ms var(--ease-bounce)' }}>
-          <path
-            d="M35.5 30.5C35.5 23.2 40.6 17.6 47.2 16.8L44.6 20.6L48.6 18.8C47.7 25.3 42.3 30.5 35.5 30.5Z"
-            fill="var(--brand-crimson)"
-          />
-          <circle cx="34.2" cy="32.2" r="2.1" fill="var(--brand-coral)" />
-        </g>
+        {/* Accent Point at Monogram Terminal */}
+        <circle cx="43.5" cy="43.5" r="2" fill="var(--brand-crimson)" />
       </svg>
 
       {/* Wordmark: Lovey. */}
@@ -95,4 +119,3 @@ export default function Logo({ size = 32, showWordmark = true }) {
     </span>
   );
 }
-

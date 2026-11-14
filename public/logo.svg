@@ -1,20 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Outer Japanese Hanko / Kamon Crest Frame -->
-  <rect x="4" y="4" width="56" height="56" rx="14" fill="#0A0D14" />
-  <rect x="7.5" y="7.5" width="49" height="49" rx="10.5" stroke="#E11D48" stroke-width="1.75" stroke-opacity="0.85" />
+  <!-- Minimalist Japanese Kamon (Geometric Cherry Blossom Crest) -->
+  <defs>
+    <linearGradient id="crestRing" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E11D48"/>
+      <stop offset="100%" stop-color="#F43F5E"/>
+    </linearGradient>
+  </defs>
 
-  <!-- Architectural Calligraphic 'L' Monogram -->
-  <path
-    d="M21 17C21 15.8954 21.8954 15 23 15H26.5C27.6046 15 28.5 15.8954 28.5 17V40.5H43C44.1046 40.5 45 41.3954 45 42.5V45.5C45 46.6046 44.1046 47.5 43 47.5H23C21.3431 47.5 21 46.1569 21 44.5V17Z"
-    fill="#FAFAFA"
-  />
+  <!-- Circular Kamon Base Badge -->
+  <circle cx="32" cy="32" r="28" fill="#0A0D14" />
+  <circle cx="32" cy="32" r="25" stroke="url(#crestRing)" stroke-width="1.5" stroke-opacity="0.85" stroke-dasharray="3.5 1.5" />
 
-  <!-- Notched Sakura Petal Accent (Top Right of the 'L') -->
+  <!-- 5 Geometric Origami Sakura Petals forming the crest -->
+  <g transform="translate(32, 28)">
+    <!-- Top Central Petal -->
+    <path d="M0 -15 L4 -6 L0 0 L-4 -6 Z" fill="#E11D48" opacity="0.95" />
+    <!-- Top Right Petal -->
+    <path d="M14 -5 L7 -1 L0 0 L6 -8 Z" fill="#F43F5E" opacity="0.9" />
+    <!-- Bottom Right Petal -->
+    <path d="M9 12 L3 5 L0 0 L10 2 Z" fill="#E11D48" opacity="0.85" />
+    <!-- Bottom Left Petal -->
+    <path d="M-9 12 L-10 2 L0 0 L-3 5 Z" fill="#F43F5E" opacity="0.9" />
+    <!-- Top Left Petal -->
+    <path d="M-14 -5 L-6 -8 L0 0 L-7 -1 Z" fill="#E11D48" opacity="0.95" />
+    <!-- Center Core Dot -->
+    <circle cx="0" cy="0" r="2.2" fill="#FFFFFF" />
+  </g>
+
+  <!-- Elegant Interlocking Precision 'L' Studio Monogram -->
   <path
-    d="M36.5 29.5C36.5 23.2 41.2 18.2 46.8 17.5L44.8 20.8L48.2 19.2C47.4 24.8 42.6 29.5 36.5 29.5Z"
-    fill="#E11D48"
+    d="M20 22 C20 20.895 20.895 20 22 20 H25.5 C26.605 20 27.5 20.895 27.5 22 V42 H42 C43.105 42 44 42.895 44 44 V46 C44 47.105 43.105 48 42 48 H22 C20.895 48 20 47.105 20 46 Z"
+    fill="#FFFFFF"
   />
-  <!-- Inner Blossom Dew Dot -->
-  <circle cx="35.5" cy="31" r="2.2" fill="#F43F5E" />
+  <!-- Subtle Vermilion Accent Notch in L base -->
+  <circle cx="43.5" cy="43.5" r="2" fill="#E11D48" />
 </svg>
-
