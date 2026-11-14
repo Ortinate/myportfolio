@@ -6,6 +6,7 @@ import ServicesSection from './components/ServicesSection';
 import PhilosophySection from './components/PhilosophySection';
 import ContactSection from './components/ContactSection';
 import CommandMenu from './components/CommandMenu';
+import CustomCursor from './components/CustomCursor';
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -61,6 +62,9 @@ export default function App() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      {/* Luxury Studio Custom Cursor (Pointer & Magnetic Aura) */}
+      <CustomCursor />
+
       {/* Floating Modern Header */}
       <Navbar
         theme={theme}

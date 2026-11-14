@@ -101,6 +101,7 @@ export default function Navbar({ theme, onToggleTheme }) {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, 'contact')}
+            className="magnetic-target"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -114,7 +115,7 @@ export default function Navbar({ theme, onToggleTheme }) {
               fontSize: '0.8rem',
               letterSpacing: '0.04em',
               whiteSpace: 'nowrap',
-              transition: 'background-color 200ms var(--ease-snappy), color 200ms var(--ease-snappy), transform 160ms var(--ease-snappy)',
+              transition: 'background-color 200ms var(--ease-snappy), color 200ms var(--ease-snappy), transform 200ms cubic-bezier(0.23, 1, 0.32, 1)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = 'var(--ink-primary)';

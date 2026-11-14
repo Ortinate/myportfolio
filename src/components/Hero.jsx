@@ -103,7 +103,7 @@ export default function Hero() {
           <div className="hero-cta-group">
             <a
               href="#services"
-              className="btn-primary"
+              className="btn-primary magnetic-target"
               onClick={(e) => scrollToSection(e, 'services')}
               style={{
                 borderRadius: '8px',
@@ -118,7 +118,7 @@ export default function Hero() {
 
             <a
               href="#contact"
-              className="btn-secondary"
+              className="btn-secondary magnetic-target"
               onClick={(e) => scrollToSection(e, 'contact')}
               style={{ borderRadius: '8px', fontWeight: 600 }}
             >
@@ -127,7 +127,7 @@ export default function Hero() {
 
             <a
               href="#bento"
-              className="btn-secondary"
+              className="btn-secondary magnetic-target"
               onClick={(e) => scrollToSection(e, 'bento')}
               style={{ borderRadius: '8px' }}
             >
