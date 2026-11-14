@@ -297,11 +297,16 @@ a {
 
 /* Studio Logo Micro-Interactions */
 .studio-logo:hover .studio-logo-mark {
-  transform: translateY(-1px) rotate(-2deg);
+  transform: translateY(-1px) scale(1.04);
 }
 
-.studio-logo:hover .studio-logo-petal {
-  transform: rotate(14deg) scale(1.08);
+.studio-logo:hover .studio-origami-blossom {
+  transform: rotate(36deg) scale(1.08);
+}
+
+.studio-logo:hover .studio-kamon-ring {
+  stroke-dashoffset: 6;
+  transition: stroke-dashoffset 600ms linear;
 }
 
 /* Header & Navigation Transitions */
