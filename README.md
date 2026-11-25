@@ -1,16 +1,19 @@
-# React + Vite
+# Lovey. — Creative Web, App & Automation Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A Japanese Modern Fusion freelance studio website built with **React + Vite**, inspired by Ukiyo-e woodblock aesthetics, Sakura motion physics, and Swiss editorial precision.
 
-Currently, two official plugins are available:
+## Highlights
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Interactive Sakura Canvas**: Falling cherry blossom petals with desktop cursor breeze/swirl physics, mobile touch/swipe support, and luminous night-mode (*Yozakura*) glow.
+- **Custom Japanese Kamon Crest Logo**: Geometric origami sakura & interlocking `L` studio monogram with spring hover micro-interactions.
+- **Theme-Adaptive Design**: Automatically syncs with OS light/dark preferences (`prefers-color-scheme`) with persistent manual override.
+- **Luxury Custom Cursor & Magnetic Physics**: Vermilion trailing ring, magnetic snapping on primary CTAs, and 3D perspective card tilt.
+- **Japanese Stationery Inquiry Scroll**: Direct studio inquiry dispatch from Tarkwa, Western Region, Ghana (Global Remote).
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+npm install
+npm run dev
+npm run build
+```
